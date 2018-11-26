@@ -11,32 +11,9 @@ namespace HomeKeep
     {
         static void Main(string[] args)
         {
-            
-            Tag[] allTags = Controller.GetAllTags();
 
-            Console.WriteLine("ТЕГИ");
+            UI.MainMenu();
 
-            for (int i = 0; i < allTags.Length - 1; i++)
-            {
-                allTags[i].Print();
-
-            }
-
-            //Note testNote = new Note("Купить", "Лимон", 1);
-            //Controller.CreateNote(testNote);
-
-            Controller.DeleteNoteInterface();
-
-
-            Note[] allNotes = Controller.GetAllNotes();
-
-            for (int i = 0; i < allNotes.Length; i++)
-            {
-                allNotes[i].Print();
-
-            }
-
-            Console.ReadKey();
         }
     }
 }

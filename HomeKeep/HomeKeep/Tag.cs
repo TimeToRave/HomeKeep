@@ -8,8 +8,20 @@ namespace HomeKeep
 {
     public class Tag
     {
-        private int Id { get; set; }
-        private string Name { get; set; }
+        private int id;
+        private string name;
+
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
 
         /// <summary>
         /// Конструктор по умолчанию

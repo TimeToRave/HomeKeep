@@ -38,9 +38,7 @@ namespace HomeKeep
             String connectionString = @"Data Source = DESKTOP-M37KRRP\SQL2017;Initial Catalog=Notes;User ID=sa;Password=11223344";
             SqlConnection connection = new SqlConnection(connectionString);
 
-            Console.WriteLine("Trying to open connection...");
             connection.Open();
-            Console.WriteLine("Connection open...");
 
             SqlCommand command;
             SqlDataReader dataReader;
@@ -67,7 +65,6 @@ namespace HomeKeep
 
 
             connection.Close();
-            Console.WriteLine("Connection closed");
              
             return notesFromBD;
 
@@ -134,7 +131,7 @@ namespace HomeKeep
             string[] rawTags = result.Split(new string[] { "<@>" }, StringSplitOptions.RemoveEmptyEntries);
 
             Tag[] tagsFromBD = new Tag[rawTags.Length];
-            for (int i = 0; i < rawTags.Length - 1; i++)
+            for (int i = 0; i < rawTags.Length; i++)
             {
                 tagsFromBD[i] = new Tag(rawTags[i]);
 
@@ -173,31 +170,7 @@ namespace HomeKeep
 
             return result;
         }
-
-
-        // TODO: Выделить этот метод в отдельный класс, так как он логически не относится к этому классу
-        static public void DeleteNoteInterface()
-        {
-            Console.Clear();
-
-            Note[] allNotes = Controller.GetAllNotes();
-
-            for (int i = 0; i < allNotes.Length; i++)
-            {
-                allNotes[i].Print();
-            }
-
-            Console.Write("Укажите идентификатор заметки для удаления: ");
-
-            int id = 0;
-            if (!Int32.TryParse(Console.ReadLine(), out id))
-            {
-                Console.WriteLine("Ошибка в вводе идентификатора");
-            }
-
-            DeleteNote(id);
-
-        }
+        
     }
 }
 
