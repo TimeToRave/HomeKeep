@@ -1,0 +1,7 @@
+C:\Projects\HomeKeep\HomeKeep\HomeKeep\bin\Debug\HomeKeep.exe.config
+C:\Projects\HomeKeep\HomeKeep\HomeKeep\bin\Debug\HomeKeep.exe
+C:\Projects\HomeKeep\HomeKeep\HomeKeep\bin\Debug\HomeKeep.pdb
+C:\Projects\HomeKeep\HomeKeep\HomeKeep\obj\Debug\HomeKeep.csprojAssemblyReference.cache
+C:\Projects\HomeKeep\HomeKeep\HomeKeep\obj\Debug\HomeKeep.csproj.CoreCompileInputs.cache
+C:\Projects\HomeKeep\HomeKeep\HomeKeep\obj\Debug\HomeKeep.exe
+C:\Projects\HomeKeep\HomeKeep\HomeKeep\obj\Debug\HomeKeep.pdb
