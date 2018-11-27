@@ -40,6 +40,7 @@ namespace HomeKeep
                 Console.WriteLine("1. Вывести все заметки");
                 Console.WriteLine("2. Добавить заметку");
                 Console.WriteLine("3. Удалить заметку");
+                Console.WriteLine("4. Поиск заметки по тегу");
                 Console.WriteLine("10. Вывести все теги");
                 Console.WriteLine("0. Выход");
 
@@ -62,6 +63,9 @@ namespace HomeKeep
                         break;
                     case 3:
                         DeleteNoteMenu();
+                        break;
+                    case 4:
+                        SearchNoteByTag();
                         break;
                     case 10:
                         PrintTags(Controller.GetAllTags());
@@ -172,14 +176,51 @@ namespace HomeKeep
             Controller.CreateNote(note);
         }
 
-        //public static void DeleteNote()
-        //{
-        //    Console.Clear();
+        public static void SearchNoteByTag ()
+        {
 
-        //    PrintNotes(Controller.GetAllNotes());
-        //    Console.Write("Введите номер заметки для удаления");
+            Tag[] tags = Controller.GetAllTags();
+            PrintTags(tags);
 
+            int searchTag = 0;
 
-        //}
+            while (true)
+            {
+                Console.Write("Введите номер тега: ");
+
+                if (!int.TryParse(Console.ReadLine(), out searchTag))
+                {
+                    Console.WriteLine("Введите корректное значение");
+                    continue;
+                }
+
+                bool flag = false;
+                //Проверяем существует ли в БД тег с таким номером
+                for (int i = 0; i < tags.Length; i++)
+                {
+                    if (tags[i].Id == searchTag)
+                    {
+                        flag = true;
+                    }
+                }
+
+                if (flag == true)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Указанного идентификатора не найдено");
+                }
+            }
+
+            Note [] foundNotes = Controller.SearchByTag(searchTag);
+            Console.Clear();
+            foreach (var note in foundNotes)
+            {
+                note.Print();
+            }
+            Console.ReadKey();
+        }
     }
 }
