@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 
 namespace HomeKeep
 {
+    //TODO Переделать все запросы
     static public class Controller
     {
 
@@ -50,7 +51,7 @@ namespace HomeKeep
         {
             
             String result = "";
-            String query = "SELECT * FROM Note";
+            String query = "SELECT * FROM Note ORDER BY id DESC";
 
             result = RunSqlQuery(query);
 
@@ -78,9 +79,22 @@ namespace HomeKeep
             RunSqlQuery(query);
         }
 
+        static public void CreateTag(Tag tag)
+        {
+            string query = "INSERT INTO Tag VALUES ('" + tag.Name + "' )";
+            RunSqlQuery(query);
+        }
+
+
         static public void DeleteNote(int id)
         {
             string query = "DELETE FROM Note Where id = " + id.ToString();
+            RunSqlQuery(query);
+        }
+
+        static public void DeleteTag(int id)
+        {
+            string query = "DELETE FROM Tag Where id = " + id.ToString();
             RunSqlQuery(query);
         }
 
@@ -129,10 +143,16 @@ namespace HomeKeep
                 return result;
         }
         
+
+        /// <summary>
+        /// Поиск заметки по идентификатору тега
+        /// </summary>
+        /// <param name="tagId">Идентификатор тега</param>
+        /// <returns>Найденная заметка</returns>
         public static Note [] SearchByTag (int tagId)
         {
             String result = "";
-            String query = "SELECT * FROM Note WHERE Note.tag=" + tagId.ToString();
+            String query = "SELECT * FROM Note WHERE Note.tag=" + tagId.ToString() + "ORDER BY id DESC";
 
             result = RunSqlQuery(query);
 
@@ -147,6 +167,61 @@ namespace HomeKeep
             }
 
             return notesFromBD;
+        }
+
+        public static void EditNote (Note note)
+        {
+            string query = "UPDATE Note SET name='" + note.Name + "' , text ='" + note.Text + "', tag='" + note.Tag.ToString() + "' WHERE id = " + note.Id.ToString();
+            RunSqlQuery(query);
+        }
+
+        public static void EditTag(Tag tag)
+        {
+            string query = "UPDATE Tag SET name='" + tag.Name + "' WHERE id = " + tag.Id.ToString();
+            RunSqlQuery(query);
+        }
+
+        public static Note GetNote (int id)
+        {
+            String result = "";
+            String query = "SELECT * FROM Note WHERE id=" + id.ToString();
+
+            result = RunSqlQuery(query);
+            
+            if(result.Length == 0)
+            {
+                return new Note();
+            }
+            else
+            {
+                result = result.Split(new string[] { "<@>" }, StringSplitOptions.RemoveEmptyEntries)[0];
+
+                Note foundNote = new Note(result);
+                return foundNote;
+
+            }
+        }
+
+
+        public static Tag GetTag(int id)
+        {
+            String result = "";
+            String query = "SELECT * FROM Tag WHERE id=" + id.ToString();
+
+            result = RunSqlQuery(query);
+
+            if(result.Length == 0)
+            {
+                return new Tag();
+            }
+            else
+            {
+                result = result.Split(new string[] { "<@>" }, StringSplitOptions.RemoveEmptyEntries)[0];
+
+                Tag foundTag = new Tag(result);
+                return foundTag;
+            }
+            
         }
     }
 }

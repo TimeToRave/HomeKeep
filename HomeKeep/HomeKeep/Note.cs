@@ -41,6 +41,7 @@ namespace HomeKeep
 
         public Note ()
         {
+            Id = 0;
             Name = "Empty";
             Text = "";
             Tag = 0;
@@ -62,6 +63,15 @@ namespace HomeKeep
             Tag = tag;
         }
 
+        //TODO Сделать аккуратные конструкторы, особенно этот!
+        public Note(int id, String name, String text, int tag)
+        {
+            Id = id;
+            Name = name;
+            Text = text;
+            Tag = tag;
+        }
+
         /// <summary>
         /// Конструктор для считывания заметок из базы данных, идентификатор заметки также считывается
         /// </summary>
@@ -72,7 +82,7 @@ namespace HomeKeep
 
             int temp = 0;
 
-            if (Int32.TryParse(words[0], out temp))
+            if (int.TryParse(words[0], out temp))
             {
                 Id = temp;
                 temp = 0;
@@ -85,7 +95,7 @@ namespace HomeKeep
             Name = words[1];
             Text = words[2];
             
-            if(Int32.TryParse(words[3], out temp))
+            if(int.TryParse(words[3], out temp))
             {
                 Tag = temp;
             }

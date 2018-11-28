@@ -12,7 +12,7 @@ namespace HomeKeep
         static void Main(string[] args)
         {
 
-            UI.MainMenu();
+            CLI.MainMenu();
 
         }
     }
